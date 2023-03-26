@@ -2,6 +2,7 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const galleryContainer = document.querySelector("ul.gallery");
+
 const addHtmlElemenys = galleryItems
   .map(({ preview, original, description }) => {
     return `<li class="gallery__item">
@@ -34,28 +35,13 @@ galleryContainer.onclick = (event) => {
   );
   instance.show();
   console.log(event.target.dataset.source);
+  const keyEscape = (evt) => {
+    console.log("Keydown: ", evt.key);
+    if (evt.key === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", keyEscape);
+    }
+  };
+
+  document.addEventListener("keydown", keyEscape);
 };
-
-// ============
-// document.addEventListener("keydown", (event) => {
-//   // console.log("Keydown: ", event.key);
-// });
-// const handleClick = (event) => {
-//   console.log("click event listener callback");
-////   event.preventDefault();
-//   console.log(event.target.dataset.source);
-// };
-// const runEsc = (evt) => {
-//   console.log("listener Esc");
-//   // instance.close();
-//   console.log(handleClick(evt));
-// };
-
-// galleryContainer.addEventListener("click", handleClick);
-// galleryContainer.addEventListener("keydown", runEsc);
-
-// // instance.close();
-// // galleryContainer.onkeydown = (event) => {
-// //   basicLightbox.create().close();
-// //   console.log(event.target.dataset.source);
-// // };
