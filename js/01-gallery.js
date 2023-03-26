@@ -1,29 +1,11 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-const galleryContainer = document.querySelector(".gallery");
-const addscriptBody = document.querySelector("body");
-const addscriptHead = document.querySelector("head");
+const galleryContainer = document.querySelector("ul.gallery");
 
-const markup = creatCardmarkups(galleryItems);
-
-galleryContainer.insertAdjacentHTML("beforeend", markup);
-galleryContainer.addEventListener("click", onClick);
-
-addscriptBody.insertAdjacentHTML(
-  "beforeend",
-  '<script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js" > </script>'
-);
-
-addscriptHead.insertAdjacentHTML(
-  "beforeend",
-  '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css"></link>'
-);
-
-function creatCardmarkups(galleryItems) {
-  return galleryItems
-    .map(({ preview, original, description }) => {
-      return `<li class="gallery__item">
+const addHtmlElemenys = galleryItems
+  .map(({ preview, original, description }) => {
+    return `<li class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
@@ -32,17 +14,22 @@ function creatCardmarkups(galleryItems) {
       alt="${description}"/>
   </a>
 </li>`;
-    })
-    .join("");
-}
+  })
+  .join("");
 
-function onClick(event) {
-  if (!event.target.classList.contains("gallery__image")) {
-    return;
-  }
-  console.log(event.target);
-}
+galleryContainer.insertAdjacentHTML("beforeend", addHtmlElemenys);
 
-/* <script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script>; */
+galleryContainer.addEventListener("click", (event) => {
+  event.preventDefault();
+});
 
-/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css"></link> */
+galleryContainer.onclick = (event) => {
+  basicLightbox
+    .create(
+      `
+		<img width="1400" height="900" src="${event.target.dataset.source}">
+	`
+    )
+    .show();
+  console.log(event.target.dataset.source);
+};
