@@ -2,6 +2,9 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const galleryContainer = document.querySelector("ul.gallery");
+// document.addEventListener("keydown", (event) => {
+//   console.log("Keydown: ", event.key);
+// });
 
 const addHtmlElemenys = galleryItems
   .map(({ preview, original, description }) => {
