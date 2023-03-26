@@ -23,6 +23,10 @@ galleryContainer.addEventListener("click", (event) => {
 });
 
 galleryContainer.onclick = (event) => {
+  if (!event.target.classList.contains("gallery__image")) {
+    console.log("ERROR");
+    return;
+  }
   basicLightbox
     .create(
       `
